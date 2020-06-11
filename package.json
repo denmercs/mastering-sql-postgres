@@ -1,0 +1,23 @@
+{
+  "name": "mastering-sql-postgres",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denmercs/mastering-sql-postgres.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denmercs/mastering-sql-postgres/issues"
+  },
+  "homepage": "https://github.com/denmercs/mastering-sql-postgres#readme",
+  "dependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
