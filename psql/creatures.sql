@@ -17,6 +17,26 @@ SELECT * FROM elves ORDER BY speed ASC;
 SELECT * FROM elves ORDER BY name;
 SELECT * FROM elves LIMIT 2;
 SELECT * FROM elves WHERE speed > 9;
+
+
+// TO TERMINATE CONNECTIONS 
+REVOKE CONNECT ON DATABASE TARGET_DB FROM public;
+
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'TARGET_DB';
+
+dropdb -U postgres creaturesdb
+
+// CREATE database
+createdb -U postgres creaturesdb
+
+// Link into our sql script
+psql -U postgres creaturesdb < creatures.sql
+
+SELECT * FROM allies JOIN elves ON allies.elf = elves.name;
+SELECT * FROM guardians JOIN hobbits ON guardians.hobbit = hobbits.name;
+SELECT * FROM guardians JOIN hobbits ON guardians.hobbit = hobbits.name JOIN elves ON guardians.elf = elves.name;
 **/
 
 
@@ -33,6 +53,16 @@ CREATE TABLE elves(
 CREATE TABLE hobbits(
     name character varying(50),
     personality character varying(50)
+);
+
+CREATE TABLE allies(
+    wizard character varying(50), 
+    elf character varying(50)
+);
+
+CREATE TABLE guardians(
+    elf character varying(50),
+    hobbit character varying(50)
 );
 
 INSERT INTO wizards(name, power)
@@ -53,3 +83,15 @@ VALUES
 ('Sam', 'brave'),
 ('Bilbo', 'greedy');
 
+INSERT INTO allies(wizard, elf)
+VALUES
+('Gandalf', 'Legolas'),
+('Gandalf', 'Arwen'),
+('Saruman', 'Elrond'),
+('Saruman', 'Legolas');
+
+INSERT INTO guardians(elf, hobbit)
+VALUES
+('Legolas', 'Frodo'),
+('Arwen', 'Sam'),
+('Elrond', 'Bilbo');
